@@ -50,7 +50,7 @@ export default function Nav() {
       <nav className="mx-auto max-w-6xl px-6 h-16 flex items-center justify-between">
         <a
           href="#top"
-          className="font-mono text-sm text-foreground tracking-tight"
+          className="font-mono text-sm text-foreground tracking-tight transition-transform hover:scale-105"
         >
           Abhishek<span className="text-accent">.</span>dev
         </a>
@@ -87,7 +87,14 @@ export default function Nav() {
           onClick={() => setOpen((v) => !v)}
           className="md:hidden text-foreground p-2 -mr-2"
         >
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            className="transition-transform duration-300"
+            style={{ transform: open ? "rotate(90deg)" : "rotate(0deg)" }}
+          >
             {open ? (
               <path
                 d="M6 6l12 12M18 6L6 18"
@@ -107,23 +114,33 @@ export default function Nav() {
         </button>
       </nav>
 
-      {open && (
-        <div className="md:hidden border-t border-border bg-background px-6 py-4">
-          <ul className="flex flex-col gap-4 font-mono text-sm text-muted">
-            {links.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className="hover:text-foreground transition-colors"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      <div
+        className={`md:hidden grid overflow-hidden bg-background transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          open ? "grid-rows-[1fr] border-t border-border opacity-100" : "grid-rows-[0fr] opacity-0"
+        }`}
+      >
+        <ul className="flex flex-col gap-4 overflow-hidden px-6 py-4 font-mono text-sm text-muted">
+          {links.map((link, i) => (
+            <li
+              key={link.href}
+              className="transition-all duration-300"
+              style={{
+                transitionDelay: open ? `${i * 60}ms` : "0ms",
+                opacity: open ? 1 : 0,
+                transform: open ? "translateY(0)" : "translateY(-6px)",
+              }}
+            >
+              <a
+                href={link.href}
+                onClick={() => setOpen(false)}
+                className="hover:text-foreground transition-colors"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
     </header>
   );
 }

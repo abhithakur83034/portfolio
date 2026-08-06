@@ -3,7 +3,7 @@ import { profile } from "@/data/resume";
 
 export default function Contact() {
   return (
-    <section id="contact" className="mx-auto max-w-6xl px-6 py-28">
+    <section id="contact" className="mx-auto max-w-6xl px-6 py-16 sm:py-20 lg:py-28">
       <Reveal>
         <div className="glow-border relative overflow-hidden rounded-3xl border border-border bg-surface px-6 py-16 text-center sm:px-16">
           <div
@@ -45,7 +45,7 @@ export default function Contact() {
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
             <a
               href={`tel:${profile.phone.replace(/\s+/g, "")}`}
-              className="rounded-full border border-border px-4 py-2 font-mono text-sm text-muted transition-colors hover:border-accent/40 hover:text-foreground"
+              className="rounded-full border border-border px-4 py-2 font-mono text-sm text-muted transition-all hover:-translate-y-0.5 hover:border-accent/40 hover:text-foreground"
             >
               {profile.phone}
             </a>
@@ -53,7 +53,7 @@ export default function Contact() {
               href={profile.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full border border-border px-4 py-2 font-mono text-sm text-muted transition-colors hover:border-accent/40 hover:text-foreground"
+              className="rounded-full border border-border px-4 py-2 font-mono text-sm text-muted transition-all hover:-translate-y-0.5 hover:border-accent/40 hover:text-foreground"
             >
               LinkedIn
             </a>

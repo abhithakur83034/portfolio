@@ -22,7 +22,7 @@ export default function Projects() {
   const rest = projects.filter((p) => !p.featured);
 
   return (
-    <section id="projects" className="mx-auto max-w-6xl px-6 py-28">
+    <section id="projects" className="mx-auto max-w-6xl px-6 py-16 sm:py-20 lg:py-28">
       <Reveal>
         <p className="font-mono text-sm text-accent">03 · Projects</p>
         <h2 className="font-display mt-3 text-3xl font-semibold text-foreground sm:text-4xl">
@@ -30,14 +30,14 @@ export default function Projects() {
         </h2>
       </Reveal>
 
-      <div className="mt-14 grid gap-6 lg:grid-cols-2">
+      <div className="mt-10 grid gap-6 sm:mt-14 lg:grid-cols-2">
         {featured.map((project, i) => (
           <Reveal key={project.name} delay={i * 100}>
             <a
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="glow-border group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface transition-transform hover:-translate-y-1"
+              className="glow-border group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_24px_48px_-24px_var(--accent)]"
             >
               <div
                 className={`relative flex h-36 items-center justify-between bg-gradient-to-br px-6 ${banners[i % banners.length]}`}
@@ -108,7 +108,7 @@ export default function Projects() {
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex h-full flex-col rounded-2xl border border-border bg-surface p-6 transition-colors hover:border-accent/50"
+              className="group flex h-full flex-col rounded-2xl border border-border bg-surface p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/50 hover:shadow-[0_20px_40px_-24px_var(--accent)]"
             >
               <div className="flex items-start justify-between gap-3">
                 <h3 className="font-display text-lg font-semibold text-foreground transition-colors group-hover:text-accent">

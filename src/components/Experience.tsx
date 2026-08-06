@@ -3,7 +3,7 @@ import { experience } from "@/data/resume";
 
 export default function Experience() {
   return (
-    <section id="experience" className="mx-auto max-w-6xl px-6 py-28">
+    <section id="experience" className="mx-auto max-w-6xl px-6 py-16 sm:py-20 lg:py-28">
       <Reveal>
         <p className="font-mono text-sm text-accent">02 · Experience</p>
         <h2 className="font-display mt-3 text-3xl font-semibold text-foreground sm:text-4xl">
@@ -11,12 +11,12 @@ export default function Experience() {
         </h2>
       </Reveal>
 
-      <div className="mt-14 space-y-6">
+      <div className="mt-10 space-y-6 sm:mt-14">
         {experience.map((job, i) => {
           const current = i === 0;
           return (
             <Reveal key={job.company} delay={i * 100}>
-              <div className="group relative overflow-hidden rounded-2xl border border-border bg-surface p-6 transition-colors hover:border-accent/40 sm:p-8">
+              <div className="group relative overflow-hidden rounded-2xl border border-border bg-surface p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-[0_20px_40px_-24px_var(--accent)] sm:p-8">
                 <div className="absolute -left-16 -top-16 h-40 w-40 rounded-full bg-accent/5 blur-3xl transition-opacity group-hover:bg-accent/10" />
 
                 <div className="flex flex-wrap items-start justify-between gap-3">

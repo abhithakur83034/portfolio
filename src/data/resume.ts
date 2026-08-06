@@ -88,7 +88,19 @@ export const projects = [
       "Integrated Google Analytics to track user navigation and improve app usability.",
       "Worked on integrating backend APIs and collaborated with UI/UX designers.",
     ],
-    tags: ["React.js", "REST APIs", "Google Analytics"],
+    tags: ["React.js", "Next.js", "REST APIs", "Google Analytics"],
+    featured: true,
+  },
+  {
+    name: "ReplySystem",
+    url: "https://app.replysystem.com/",
+    description: "Ticket management platform for centralized customer support.",
+    points: [
+      "Built a ticket management system for centralized customer support.",
+      "Implemented workflows for ticket routing and automation.",
+      "Developed responsive UI and integrated backend APIs.",
+    ],
+    tags: ["React.js", "Vite.js", "Automation", "REST APIs"],
     featured: true,
   },
   {
@@ -101,7 +113,7 @@ export const projects = [
       "Ensured robust functionality, smooth integrations, and scalable architecture.",
     ],
     tags: ["React.js", "Next.js", "Scalable Architecture"],
-    featured: true,
+    featured: false,
   },
   {
     name: "Muthoot Insurance Brokers",
@@ -113,19 +125,7 @@ export const projects = [
       "Implemented reusable components across product listing, quotation, and policy detail pages.",
       "Optimized load times and performance across desktop and mobile.",
     ],
-    tags: ["React.js", "Performance", "Responsive Design"],
-    featured: false,
-  },
-  {
-    name: "ReplySystem",
-    url: "https://app.replysystem.com/",
-    description: "Ticket management platform for centralized customer support.",
-    points: [
-      "Built a ticket management system for centralized customer support.",
-      "Implemented workflows for ticket routing and automation.",
-      "Developed responsive UI and integrated backend APIs.",
-    ],
-    tags: ["React.js", "Automation", "REST APIs"],
+    tags: ["React.js", "Next.js", "Performance", "Responsive Design"],
     featured: false,
   },
   {
@@ -137,7 +137,7 @@ export const projects = [
       "Real-time messaging, video conferencing, shared workspaces, and project boards.",
       "Tools that streamline communication and teamwork across projects and devices.",
     ],
-    tags: ["React.js", "Real-time", "Collaboration"],
+    tags: ["React.js", "Vite.js", "WebSocket", "Real-time"],
     featured: false,
   },
 ];

@@ -9,7 +9,7 @@ const groupAccent: Record<string, string> = {
 
 export default function About() {
   return (
-    <section id="about" className="mx-auto max-w-6xl px-6 py-28">
+    <section id="about" className="mx-auto max-w-6xl px-6 py-16 sm:py-20 lg:py-28">
       <Reveal>
         <p className="font-mono text-sm text-accent">01 · About</p>
         <h2 className="font-display mt-3 text-3xl font-semibold text-foreground sm:text-4xl">
@@ -17,9 +17,9 @@ export default function About() {
         </h2>
       </Reveal>
 
-      <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-10 grid gap-6 sm:grid-cols-2 sm:mt-14 lg:grid-cols-4">
         <Reveal>
-          <div className="glow-border relative h-full overflow-hidden rounded-2xl border border-border bg-surface p-6">
+          <div className="glow-border relative h-full overflow-hidden rounded-2xl border border-border bg-surface p-6 transition-transform duration-300 hover:-translate-y-1.5">
             <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-accent/10 blur-3xl" />
             <p className="font-display text-lg font-semibold text-foreground">
               Building interfaces people trust.
@@ -35,7 +35,7 @@ export default function About() {
         {skillGroups.map((group, i) => (
           <Reveal key={group.label} delay={i * 100}>
             <div
-              className={`relative h-full overflow-hidden rounded-2xl border border-border bg-surface p-6 transition-colors hover:border-accent/40`}
+              className={`relative h-full overflow-hidden rounded-2xl border border-border bg-surface p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/40 hover:shadow-[0_20px_40px_-20px_var(--accent)]`}
             >
               <div
                 className={`absolute -right-6 -top-6 h-28 w-28 rounded-full bg-gradient-to-br ${
@@ -47,7 +47,7 @@ export default function About() {
                 {group.skills.map((skill) => (
                   <li
                     key={skill}
-                    className="rounded-full border border-border bg-background/40 px-3 py-1 text-sm text-muted transition-colors hover:border-accent/40 hover:text-foreground"
+                    className="rounded-full border border-border bg-background/40 px-3 py-1 text-sm text-muted transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/40 hover:text-foreground"
                   >
                     {skill}
                   </li>
