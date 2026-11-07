@@ -1,4 +1,6 @@
 import Reveal from "@/components/Reveal";
+import Tilt3D from "@/components/Tilt3D";
+import Depth from "@/components/Depth";
 import { projects } from "@/data/resume";
 
 const banners = [
@@ -30,14 +32,15 @@ export default function Projects() {
         </h2>
       </Reveal>
 
-      <div className="mt-10 grid gap-6 sm:mt-14 lg:grid-cols-2">
+      <Depth className="mt-10 grid gap-6 sm:mt-14 lg:grid-cols-2">
         {featured.map((project, i) => (
-          <Reveal key={project.name} delay={i * 100}>
+          <Reveal key={project.name} delay={i * 100} className="h-full">
+            <Tilt3D className="h-full" max={5}>
             <a
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="glow-border group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_24px_48px_-24px_var(--accent)]"
+              className="glow-border group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface transition-all duration-300 hover:shadow-[0_24px_48px_-24px_var(--accent)]"
             >
               <div
                 className={`relative flex h-36 items-center justify-between bg-gradient-to-br px-6 ${banners[i % banners.length]}`}
@@ -52,7 +55,7 @@ export default function Projects() {
 
               <div className="flex flex-1 flex-col p-6">
                 <div className="flex items-start justify-between gap-3">
-                  <h3 className="font-display text-xl font-semibold text-foreground transition-colors group-hover:text-accent">
+                  <h3 className="pop pop-3 font-display text-xl font-semibold text-foreground transition-colors group-hover:text-accent">
                     {project.name}
                   </h3>
                   <svg
@@ -97,21 +100,23 @@ export default function Projects() {
                 </ul>
               </div>
             </a>
+            </Tilt3D>
           </Reveal>
         ))}
-      </div>
+      </Depth>
 
-      <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <Depth className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {rest.map((project, i) => (
           <Reveal key={project.name} delay={(i % 3) * 100} className="h-full">
+            <Tilt3D className="h-full" max={5}>
             <a
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex h-full flex-col rounded-2xl border border-border bg-surface p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-accent/50 hover:shadow-[0_20px_40px_-24px_var(--accent)]"
+              className="group flex h-full flex-col rounded-2xl border border-border bg-surface p-6 transition-all duration-300 hover:border-accent/50 hover:shadow-[0_20px_40px_-24px_var(--accent)]"
             >
               <div className="flex items-start justify-between gap-3">
-                <h3 className="font-display text-lg font-semibold text-foreground transition-colors group-hover:text-accent">
+                <h3 className="pop pop-3 font-display text-lg font-semibold text-foreground transition-colors group-hover:text-accent">
                   {project.name}
                 </h3>
                 <svg
@@ -155,9 +160,10 @@ export default function Projects() {
                 ))}
               </ul>
             </a>
+            </Tilt3D>
           </Reveal>
         ))}
-      </div>
+      </Depth>
     </section>
   );
 }

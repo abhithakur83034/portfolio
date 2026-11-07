@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Tilt3D from "@/components/Tilt3D";
 
 const GRID = 8;
 
@@ -24,6 +25,7 @@ const pieces = Array.from({ length: GRID * GRID }, (_, i) => {
 export default function ProfilePhoto() {
   const [broken, setBroken] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [assembled, setAssembled] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
 
@@ -52,6 +54,13 @@ export default function ProfilePhoto() {
     return () => observer.disconnect();
   }, []);
 
+  // Only allow the pop-out once the mosaic reveal has fully assembled.
+  useEffect(() => {
+    if (!visible) return;
+    const t = setTimeout(() => setAssembled(true), 5200);
+    return () => clearTimeout(t);
+  }, [visible]);
+
   const badgeStyle = (delay: number, float: string) =>
     visible
       ? {
@@ -77,7 +86,8 @@ export default function ProfilePhoto() {
         className="absolute -inset-6 rounded-[2.5rem] bg-gradient-to-br from-accent/30 via-accent-2/20 to-transparent blur-2xl"
       />
 
-      <div className="glow-border relative aspect-[4/5] w-full overflow-hidden rounded-[2rem] border border-border bg-surface">
+      <Tilt3D max={10} className="relative z-10">
+      <div className={`photo-bg relative aspect-[4/5] w-full overflow-hidden rounded-[2rem] ${broken ? "border border-border bg-surface" : ""} ${assembled ? "is-ready" : ""}`}>
         {!broken ? (
           pieces.map(({ row, col, dx, dy, rotate, delay }) => (
             <div
@@ -116,8 +126,20 @@ export default function ProfilePhoto() {
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent" />
       </div>
 
+      {!broken && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src="/profile-cutout.png"
+          alt=""
+          aria-hidden
+          draggable={false}
+          className={`photo-cutout absolute inset-0 h-full w-full select-none object-fill ${assembled ? "is-ready" : ""}`}
+        />
+      )}
+      </Tilt3D>
+
       <div
-        className="absolute -right-4 -top-4 flex items-center gap-2 rounded-full border border-border bg-surface/90 px-3 py-1.5 font-mono text-xs text-foreground shadow-lg backdrop-blur"
+        className="absolute z-20 -right-4 -top-4 flex items-center gap-2 rounded-full border border-border bg-surface/90 px-3 py-1.5 font-mono text-xs text-foreground shadow-lg backdrop-blur"
         style={badgeStyle(4600, "float")}
       >
         <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse-ring" />
@@ -125,14 +147,14 @@ export default function ProfilePhoto() {
       </div>
 
       <div
-        className="absolute -left-6 top-1/3 flex items-center gap-2 rounded-full border border-border bg-surface/90 px-3 py-1.5 font-mono text-xs text-foreground shadow-lg backdrop-blur"
+        className="absolute z-20 -left-6 top-1/3 flex items-center gap-2 rounded-full border border-border bg-surface/90 px-3 py-1.5 font-mono text-xs text-foreground shadow-lg backdrop-blur"
         style={badgeStyle(4800, "float-slow")}
       >
         Next.js
       </div>
 
       <div
-        className="absolute -bottom-4 left-1/4 flex items-center gap-2 rounded-full border border-border bg-surface/90 px-3 py-1.5 font-mono text-xs text-foreground shadow-lg backdrop-blur"
+        className="absolute z-20 -bottom-4 left-1/4 flex items-center gap-2 rounded-full border border-border bg-surface/90 px-3 py-1.5 font-mono text-xs text-foreground shadow-lg backdrop-blur"
         style={badgeStyle(5000, "float")}
       >
         TypeScript

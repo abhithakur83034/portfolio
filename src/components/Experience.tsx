@@ -1,4 +1,6 @@
 import Reveal from "@/components/Reveal";
+import Tilt3D from "@/components/Tilt3D";
+import Depth from "@/components/Depth";
 import { experience } from "@/data/resume";
 
 export default function Experience() {
@@ -11,18 +13,19 @@ export default function Experience() {
         </h2>
       </Reveal>
 
-      <div className="mt-10 space-y-6 sm:mt-14">
+      <Depth className="mt-10 space-y-6 sm:mt-14">
         {experience.map((job, i) => {
           const current = i === 0;
           return (
             <Reveal key={job.company} delay={i * 100}>
-              <div className="group relative overflow-hidden rounded-2xl border border-border bg-surface p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-[0_20px_40px_-24px_var(--accent)] sm:p-8">
+              <Tilt3D max={5}>
+              <div className="group relative overflow-hidden rounded-2xl border border-border bg-surface p-6 transition-all duration-300 hover:border-accent/40 hover:shadow-[0_20px_40px_-24px_var(--accent)] sm:p-8">
                 <div className="absolute -left-16 -top-16 h-40 w-40 rounded-full bg-accent/5 blur-3xl transition-opacity group-hover:bg-accent/10" />
 
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div>
                     <div className="flex items-center gap-2">
-                      <h3 className="font-display text-lg font-semibold text-foreground">
+                      <h3 className="pop pop-3 font-display text-lg font-semibold text-foreground">
                         {job.role}
                       </h3>
                       {current && (
@@ -61,10 +64,11 @@ export default function Experience() {
                   ))}
                 </ul>
               </div>
+              </Tilt3D>
             </Reveal>
           );
         })}
-      </div>
+      </Depth>
     </section>
   );
 }

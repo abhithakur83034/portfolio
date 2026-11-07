@@ -132,22 +132,177 @@ body::before {
 @keyframes reveal {
   from {
     opacity: 0;
-    transform: translateY(16px);
-    filter: blur(4px);
+    transform: perspective(1200px) translate3d(0, 48px, -140px) rotateX(-28deg) rotateY(6deg);
+    filter: blur(6px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: perspective(1200px) translate3d(0, 0, 0) rotateX(0) rotateY(0);
     filter: blur(0);
   }
 }
 
 .reveal {
   opacity: 0;
+  transform-origin: 50% 100%;
 }
 
 .reveal.is-visible {
-  animation: reveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: reveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ---------- 3D tilt cards ---------- */
+
+/*
+ * The box never moves. Only its content (.pop layers) lifts out toward the
+ * viewer and tilts with the cursor, each layer at its own depth.
+ * On touch screens the layers follow the phone's gyroscope instead.
+ */
+:root {
+  --dev-rx: 0deg;
+  --dev-ry: 0deg;
+  --dev-x: 0;
+  --dev-y: 0;
+}
+
+.tilt-scene {
+  --rx: 0deg;
+  --ry: 0deg;
+  --gx: 50%;
+  --gy: 50%;
+}
+
+.pop {
+  --pop-z: 30px;
+  transform: perspective(900px) rotateX(0deg) rotateY(0deg) translateZ(0);
+  transition:
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    text-shadow 0.6s ease,
+    filter 0.6s ease;
+  will-change: transform;
+}
+
+.pop-1 {
+  --pop-z: 8px;
+}
+
+.pop-2 {
+  --pop-z: 14px;
+}
+
+.pop-3 {
+  --pop-z: 22px;
+}
+
+@media (hover: hover) {
+  .tilt-scene:hover .pop {
+    transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) translateZ(var(--pop-z));
+    filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.4));
+    transition-duration: 0.25s;
+  }
+}
+
+@media (hover: none) {
+  .tilt-scene .pop {
+    transform: perspective(900px) rotateX(var(--dev-rx)) rotateY(var(--dev-ry))
+      translateZ(calc(var(--pop-z) * 0.5));
+    transition-duration: 0.1s;
+  }
+}
+
+/* Profile photo: background stays in the frame, only the person lifts out. */
+.photo-bg {
+  transition: filter 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.photo-cutout {
+  opacity: 0;
+  transform-origin: 50% 100%;
+  transform: perspective(900px) rotateX(0deg) rotateY(0deg) translateZ(0) scale(1);
+  filter: drop-shadow(0 0 0 rgba(0, 0, 0, 0));
+  transition:
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.6s ease,
+    opacity 0.35s ease;
+  pointer-events: none;
+}
+
+@media (hover: hover) {
+  .tilt-scene:hover .photo-bg {
+    filter: brightness(0.6) saturate(0.85) blur(1px);
+  }
+
+  .tilt-scene:hover .photo-cutout.is-ready {
+    opacity: 1;
+    transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) translateZ(24px)
+      translateY(-2.5%) scale(1.035);
+    filter: drop-shadow(0 16px 18px rgba(0, 0, 0, 0.55))
+      drop-shadow(0 0 18px rgba(52, 211, 153, 0.2));
+    transition-duration: 0.3s, 0.6s, 0.35s;
+  }
+}
+
+@media (hover: none) {
+  .photo-cutout.is-ready {
+    opacity: 1;
+    transform: perspective(900px) rotateX(var(--dev-rx)) rotateY(var(--dev-ry)) translateZ(14px)
+      translateY(-1.5%) scale(1.02);
+    filter: drop-shadow(0 12px 14px rgba(0, 0, 0, 0.5));
+    transition-duration: 0.1s, 0.6s, 0.6s;
+  }
+
+  .tilt-scene .photo-bg.is-ready {
+    filter: brightness(0.75);
+  }
+}
+
+.tilt-glare {
+  position: absolute;
+  inset: 0;
+  border-radius: 1rem;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    420px circle at var(--gx) var(--gy),
+    rgba(255, 255, 255, 0.1),
+    transparent 55%
+  );
+  transition: opacity 0.4s ease;
+  transform: translateZ(1px);
+}
+
+@media (hover: hover) {
+  .tilt-scene:hover .tilt-glare {
+    opacity: 1;
+  }
+}
+
+/* 3D flip for skill chips */
+@keyframes chip-flip {
+  from {
+    transform: rotateX(0);
+  }
+  to {
+    transform: rotateX(360deg);
+  }
+}
+
+.chip-3d:hover {
+  animation: chip-flip 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal.is-visible {
+    animation-duration: 0.01ms;
+  }
+  .pop,
+  .tilt-scene .pop,
+  .tilt-scene:hover .pop {
+    transform: none !important;
+  }
+  .chip-3d:hover {
+    animation: none;
+  }
 }
 
 @keyframes float {

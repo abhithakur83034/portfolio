@@ -9,7 +9,7 @@ import Reveal from "@/components/Reveal";
 
 const stats = [
   { value: 3, suffix: "+", label: "Years Experience" },
-  { value: 5, suffix: "", label: "Live Products" },
+  { value: 7, suffix: "", label: "Live Products" },
   { value: 3, suffix: "", label: "Companies" },
 ];
 

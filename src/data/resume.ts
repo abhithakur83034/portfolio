@@ -104,6 +104,34 @@ export const projects = [
     featured: true,
   },
   {
+    name: "JobRadar",
+    url: "https://job-radar-lime.vercel.app/about",
+    description:
+      "Personal job-opening radar that scores new roles against your résumé and surfaces only the matches worth your time.",
+    points: [
+      "Hourly ingestion from Greenhouse, Lever and Ashby company boards plus Remotive, Remote OK, Jobicy and The Muse feeds.",
+      "Résumé parsing and match scoring on title, skills, location and seniority, with alerts for strong new matches.",
+      "Optional read-only Gmail integration to pull in LinkedIn, Naukri and Indeed job-alert emails.",
+      "Application and follow-up tracking, auth, and light/dark theming.",
+    ],
+    tags: ["Next.js", "Tailwind CSS", "Gmail API", "Job Matching"],
+    featured: false,
+  },
+  {
+    name: "Solitary Technologies",
+    url: "https://solitary-nu.vercel.app/",
+    description:
+      "Marketing site for a digital product studio, with interactive hero, 3D team cards, and theme and brightness controls.",
+    points: [
+      "Multi-page studio site covering about, team, 14 services, case studies, process and contact.",
+      "Interactive particle hero, 3D hover team cards, and live product-preview mockups for case studies.",
+      "Light/dark/auto theming with a brightness control, persisted without a flash on load.",
+      "SEO with schema.org Organization and Breadcrumb structured data.",
+    ],
+    tags: ["Next.js", "React", "SEO", "Animation"],
+    featured: false,
+  },
+  {
     name: "Motilal Oswal Insurance",
     url: "https://insurance.motilaloswal.com",
     description:
