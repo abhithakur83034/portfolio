@@ -1,10 +1,14 @@
 import Reveal from "@/components/Reveal";
+import Tilt3D from "@/components/Tilt3D";
+import Depth from "@/components/Depth";
 import { profile } from "@/data/resume";
 
 export default function Contact() {
   return (
     <section id="contact" className="mx-auto max-w-6xl px-6 py-16 sm:py-20 lg:py-28">
+      <Depth>
       <Reveal>
+        <Tilt3D max={5}>
         <div className="glow-border relative overflow-hidden rounded-3xl border border-border bg-surface px-6 py-16 text-center sm:px-16">
           <div
             aria-hidden
@@ -12,7 +16,7 @@ export default function Contact() {
           />
 
           <p className="font-mono text-sm text-accent">04 · Contact</p>
-          <h2 className="font-display mx-auto mt-3 max-w-xl text-3xl font-semibold text-foreground sm:text-4xl">
+          <h2 className="pop pop-3 font-display mx-auto mt-3 max-w-xl text-3xl font-semibold text-foreground sm:text-4xl">
             Let&apos;s build something great together
           </h2>
           <p className="mx-auto mt-4 max-w-md text-muted leading-relaxed">
@@ -62,7 +66,9 @@ export default function Contact() {
             </span>
           </div>
         </div>
+        </Tilt3D>
       </Reveal>
+      </Depth>
     </section>
   );
 }
